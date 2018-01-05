@@ -33,5 +33,5 @@
     12306火车票剩余情况 
 * * *
    [火车票](./ticket.png)
-
+   <img src="./ticket.png" >
 * * *
