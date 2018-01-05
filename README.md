@@ -16,10 +16,10 @@
    <br/>│   └── sina_ssq.py
    <br/>├── README.md
    <br/>└── tickets
-   <br/>     ├── parse_stations.py
-   <br/>     ├── stations.py
-   <br/>     ├── stations.pyc
-   <br/>     └── tickets.py
+   <br/>│   ├── parse_stations.py
+   <br/>│   ├── stations.py
+   <br/>│   ├── stations.pyc
+   <br/>│   └── tickets.py
 
 4 directories, 12 files
 * * *
