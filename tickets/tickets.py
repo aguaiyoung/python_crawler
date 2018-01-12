@@ -15,6 +15,7 @@ Options:
 import requests
 import stations
 import json
+import myLog
 from datetime import datetime
 from docopt import docopt
 from prettytable import PrettyTable
@@ -22,6 +23,7 @@ from colorama import Fore
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
 
 requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
+date = ''
 
 class TrainCollection(object):
 
@@ -71,6 +73,13 @@ class TrainCollection(object):
             '9': data_list[29] or '--',
             '8': data_list[33] or '--'
             }
+        soft_seat = data_list[23]
+        hard_seat = data_list[28]
+        if soft_seat != u'无' or hard_seat != u'无':
+            checi = data_list[3]
+            date = data_list[13]
+            message = date + ' ' + checi + u' 软卧剩余 ' + soft_seat + u' 硬卧剩余 '+ hard_seat
+            myLog.writeLog(message)
         #print value
         return value
 
@@ -108,7 +117,7 @@ class Cli(object):
         'leftTicketDTO.to_station={}&'
         'purpose_codes=ADULT'
     )
-
+       
     def __init__(self):
         self.arguments = docopt(__doc__, version='Tickets 1.0')
         self.parse_station()
@@ -142,7 +151,9 @@ class Cli(object):
            self.arguments['<to>'] = '南昌'
         if self.arguments['<to>'] == 'hf':
            self.arguments['<to>'] = '合肥'  
-        return
+        if self.arguments['<to>'] == 'aq':
+           self.arguments['<to>'] = '安庆'  
+	return
 
     def check_arguments_validity(self):
         if self.from_station is None or self.to_station is None:
@@ -156,10 +167,10 @@ class Cli(object):
             exit()
 
     def run(self):
-        print (self.request_url)
+        #print (self.request_url)
         r = requests.get(self.request_url, verify=False)
         status = r.json()['status']
-        print status
+        #print status
         if status == False:
            print r.json()['c_url']
            url = r.json()['c_url']
