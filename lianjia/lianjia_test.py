@@ -43,7 +43,7 @@ def disable(self):
    self.FAIL = ''
    self.ENDC = ''
 
-def writeToCsv(title, houseinfo, position, unitprice, totalprice, dealprice):
+def writeToCsv(title, houseinfo, position, unitprice, totalprice, dealprice, dealDate):
     #data_str = data.encode('utf8')
     
     data = u''.join(title)
@@ -98,15 +98,16 @@ def lianjia_caputure(soup):
         position  = item.find("div",class_="positionInfo").text
         unitprice = item.find("div",class_="unitPrice").text
         totalprice = item.find("div",class_ ="totalPrice").text
+        dealDate = item.find("div",class_ ="dealDate").text
         #print totalprice
         deal_price = item.find("div",class_ ="dealCycleeInfo")
         if not deal_price:
            dealprice= '--'
         else:
            dealprice=deal_price.text
-        print (bcolors.YELLOW + title +bcolors.ENDC +' ' +houseinfo + ' ' + position +' ' +bcolors.GREEN + unitprice + bcolors.ENDC + bcolors.RED  + u' 挂牌 ' +totalprice + bcolors.ENDC +' ' + bcolors.GREEN + dealprice + bcolors.ENDC)
+        print (bcolors.YELLOW + title +bcolors.ENDC +' ' +houseinfo + ' ' + position +' ' +bcolors.GREEN + unitprice + bcolors.ENDC + bcolors.RED  + u' 挂牌 ' +totalprice + bcolors.ENDC +' ' + bcolors.GREEN + dealprice + bcolors.ENDC + ' ' + dealDate)
         if int(a.output) is 1:
-           writeToCsv(title, houseinfo, position, unitprice, totalprice, dealprice)
+           writeToCsv(title, houseinfo, position, unitprice, totalprice, dealprice, dealDate)
     return
 
 def usage():

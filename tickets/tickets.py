@@ -114,7 +114,7 @@ class Cli(object):
         self.parse_station()
         print self.arguments['<from>']
         print self.arguments['<to>']
-        self.leftTicket = 'queryA'
+        self.leftTicket = 'queryZ'
         self.from_station = stations.get_telecode(self.arguments['<from>'])
         self.to_station = stations.get_telecode(self.arguments['<to>'])
         self.date = self.arguments['<date>']
@@ -138,6 +138,10 @@ class Cli(object):
            self.arguments['<to>'] = '北京西'
         if self.arguments['<to>'] == 'jj':
            self.arguments['<to>'] = '九江'
+        if self.arguments['<to>'] == 'nc':
+           self.arguments['<to>'] = '南昌'
+        if self.arguments['<to>'] == 'hf':
+           self.arguments['<to>'] = '合肥'  
         return
 
     def check_arguments_validity(self):
